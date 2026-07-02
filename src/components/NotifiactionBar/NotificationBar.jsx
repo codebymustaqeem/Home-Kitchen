@@ -9,7 +9,7 @@ const NotificationBar = () => {
         <div className="notification-content">
           <div className="notification-item">
             <FaMotorcycle className="icon" />
-            <span>Free delivery on orders above ₹299</span>
+            <span>Free delivery on orders above Rs299</span>
           </div>
           
           <div className="notification-item">

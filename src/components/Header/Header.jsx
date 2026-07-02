@@ -58,7 +58,7 @@ const Header = ({
             <FaShoppingCart className="cart-icon" />
             <div className="cart-info">
               <span className="cart-count">{cartItemsCount} items</span>
-              <span className="cart-total">₹{cartTotal.toFixed(2)}</span>
+              <span className="cart-total">Rs{cartTotal.toFixed(2)}</span>
             </div>
           </button>
         </div>

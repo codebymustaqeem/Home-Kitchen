@@ -45,7 +45,7 @@ const FoodCard = ({ item, quantity, onAdd }) => {
 
         <div className="card-footer">
           <div className="price-section">
-            <span className="price">₹{item.price}</span>
+            <span className="price">Rs{item.price}</span>
             {quantity > 0 && (
               <span className="quantity-badge">{quantity} in cart</span>
             )}

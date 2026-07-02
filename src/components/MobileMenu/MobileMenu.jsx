@@ -81,7 +81,7 @@ const MobileMenu = ({ isOpen, onClose, selectedCategory, onCategorySelect }) => 
             </div>
             <div className="contact-item">
               <FaMotorcycle />
-              <span>Free delivery above ₹299</span>
+              <span>Free delivery above Rs299</span>
             </div>
             <div className="contact-item">
               <FaStar />

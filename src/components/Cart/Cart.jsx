@@ -26,7 +26,7 @@ const Cart = ({
 
   const formatOrderMessage = () => {
     const itemsText = cart.map(item => 
-      `${item.quantity}x ${item.name} - ₹${(item.price * item.quantity).toFixed(0)}`
+      `${item.quantity}x ${item.name} - Rs${(item.price * item.quantity).toFixed(0)}`
     ).join('\n');
 
     return `*NEW ORDER - FoodHub*\n\n` +
@@ -36,10 +36,10 @@ const Cart = ({
            `*Delivery Address:*\n${location || 'Not provided'}\n\n` +
            `*Order Items:*\n${itemsText}\n\n` +
            `*Order Summary:*\n` +
-           `Subtotal: ₹${cartTotal.toFixed(0)}\n` +
-           `Delivery: ₹${deliveryCharge.toFixed(0)}\n` +
-           `GST (5%): ₹${gst.toFixed(0)}\n` +
-           `*Total: ₹${grandTotal.toFixed(0)}*\n\n` +
+           `Subtotal: Rs${cartTotal.toFixed(0)}\n` +
+           `Delivery: Rs${deliveryCharge.toFixed(0)}\n` +
+           `GST (5%): Rs${gst.toFixed(0)}\n` +
+           `*Total: Rs${grandTotal.toFixed(0)}*\n\n` +
            `*Special Instructions:*\n${specialInstructions || 'None'}\n\n` +
            `*Order Time:* ${new Date().toLocaleString('en-IN', { 
              timeZone: 'Asia/Kolkata',
@@ -111,7 +111,7 @@ const Cart = ({
                     <div className="item-info">
                       <h4>{item.name}</h4>
                       <div className="item-details">
-                        <span className="price">₹{item.price.toFixed(0)} each</span>
+                        <span className="price">Rs{item.price.toFixed(0)} each</span>
                         <span className="veg-badge">{item.isVeg ? '🟢 Veg' : '🔴 Non-Veg'}</span>
                       </div>
                     </div>
@@ -134,7 +134,7 @@ const Cart = ({
                       </div>
 
                       <div className="item-total">
-                        <span>₹{(item.price * item.quantity).toFixed(0)}</span>
+                        <span>Rs{(item.price * item.quantity).toFixed(0)}</span>
                       </div>
 
                       <button 
@@ -162,29 +162,29 @@ const Cart = ({
                 
                 <div className="summary-row">
                   <span>Subtotal</span>
-                  <span>₹{cartTotal.toFixed(0)}</span>
+                  <span>Rs{cartTotal.toFixed(0)}</span>
                 </div>
                 
                 <div className="summary-row">
                   <span>Delivery Charge</span>
                   <span className={deliveryCharge === 0 ? 'free' : ''}>
-                    {deliveryCharge === 0 ? 'FREE' : `₹${deliveryCharge.toFixed(0)}`}
+                    {deliveryCharge === 0 ? 'FREE' : `Rs${deliveryCharge.toFixed(0)}`}
                   </span>
                 </div>
                 
                 <div className="summary-row">
                   <span>GST (5%)</span>
-                  <span>₹{gst.toFixed(0)}</span>
+                  <span>Rs{gst.toFixed(0)}</span>
                 </div>
                 
                 <div className="summary-row total">
                   <span>Total Amount</span>
-                  <span className="grand-total">₹{grandTotal.toFixed(0)}</span>
+                  <span className="grand-total">Rs{grandTotal.toFixed(0)}</span>
                 </div>
 
                 {cartTotal < 299 && (
                   <div className="free-delivery-note">
-                    Add ₹{(299 - cartTotal).toFixed(0)} more for FREE delivery!
+                    Add Rs{(299 - cartTotal).toFixed(0)} more for FREE delivery!
                   </div>
                 )}
               </div>
@@ -260,13 +260,13 @@ const Cart = ({
                   {cart.map(item => (
                     <div key={item.id} className="preview-item">
                       <span>{item.quantity}x {item.name}</span>
-                      <span>₹{(item.price * item.quantity).toFixed(0)}</span>
+                      <span>Rs{(item.price * item.quantity).toFixed(0)}</span>
                     </div>
                   ))}
                 </div>
                 <div className="preview-total">
                   <span>Total:</span>
-                  <span>₹{grandTotal.toFixed(0)}</span>
+                  <span>Rs{grandTotal.toFixed(0)}</span>
                 </div>
               </div>
             </div>
