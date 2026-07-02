@@ -1,0 +1,98 @@
+@import '../../styles/colors.scss';
+
+.category-filter {
+  flex: 1;
+  overflow: hidden;
+
+  .categories-scroll {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $gray-light;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray;
+      border-radius: 3px;
+
+      &:hover {
+        background: $gray-dark;
+      }
+    }
+
+    .category-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: $gray-light;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      min-width: 90px;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: rgba($primary, 0.3);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, $primary 0%, darken($primary, 10%) 100%);
+        color: $light;
+        border-color: $primary;
+        box-shadow: 0 4px 15px rgba($primary, 0.3);
+
+        .category-icon {
+          transform: scale(1.1);
+        }
+      }
+
+      .category-icon {
+        font-size: 1.75rem;
+        transition: transform 0.3s ease;
+      }
+
+      .category-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .category-filter {
+    .categories-scroll {
+      gap: 0.5rem;
+      padding: 0.25rem;
+
+      .category-btn {
+        padding: 0.5rem 0.75rem;
+        min-width: 70px;
+
+        .category-icon {
+          font-size: 1.5rem;
+        }
+
+        .category-label {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}

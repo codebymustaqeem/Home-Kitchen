@@ -1,0 +1,621 @@
+@import '../../styles/colors.scss';
+
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease;
+}
+
+.cart-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 450px;
+  background: $light;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+
+  .cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid $gray-light;
+    background: linear-gradient(135deg, $dark 0%, lighten($dark, 10%) 100%);
+    color: $light;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+
+      .item-count {
+        font-size: 1rem;
+        opacity: 0.9;
+        font-weight: 500;
+      }
+    }
+
+    .close-btn {
+      background: rgba($light, 0.1);
+      border: none;
+      color: $light;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba($light, 0.2);
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .cart-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+
+    .empty-cart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      text-align: center;
+
+      .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.3;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        color: $dark;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: $gray-dark;
+        font-size: 1rem;
+      }
+    }
+
+    .cart-items {
+      .cart-item {
+        padding: 1.25rem 0;
+        border-bottom: 1px solid $gray-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .item-info {
+          margin-bottom: 1rem;
+
+          h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: $dark;
+            margin-bottom: 0.5rem;
+          }
+
+          .item-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.9rem;
+
+            .price {
+              color: $primary;
+              font-weight: 600;
+            }
+
+            .veg-badge {
+              padding: 0.25rem 0.5rem;
+              border-radius: 4px;
+              font-size: 0.75rem;
+              font-weight: 500;
+            }
+          }
+        }
+
+        .item-controls {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+
+          .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: $gray-light;
+            padding: 0.5rem;
+            border-radius: 8px;
+
+            button {
+              background: $light;
+              border: none;
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              color: $dark;
+
+              &:hover {
+                background: $primary;
+                color: $light;
+              }
+            }
+
+            .quantity {
+              min-width: 24px;
+              text-align: center;
+              font-weight: 600;
+              font-size: 1rem;
+            }
+          }
+
+          .item-total {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: $primary;
+            min-width: 60px;
+            text-align: right;
+          }
+
+          .remove-btn {
+            background: rgba($error, 0.1);
+            border: none;
+            color: $error;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background: $error;
+              color: $light;
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+    }
+
+    .location-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: rgba($accent, 0.05);
+      border-radius: 12px;
+      margin: 1.5rem 0;
+
+      svg {
+        font-size: 1.5rem;
+        color: $accent;
+        flex-shrink: 0;
+      }
+
+      .location-info {
+        flex: 1;
+
+        .label {
+          display: block;
+          font-size: 0.85rem;
+          color: $gray-dark;
+          margin-bottom: 0.25rem;
+        }
+
+        .address {
+          display: block;
+          font-weight: 600;
+          color: $dark;
+          font-size: 0.95rem;
+        }
+      }
+    }
+
+    .cart-summary {
+      background: $gray-light;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+
+      h3 {
+        font-size: 1.25rem;
+        color: $dark;
+        margin-bottom: 1.25rem;
+        font-weight: 700;
+      }
+
+      .summary-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &.total {
+          padding-top: 1rem;
+          margin-top: 1rem;
+          border-top: 2px solid $gray;
+          font-size: 1.1rem;
+          font-weight: 700;
+
+          .grand-total {
+            color: $primary;
+            font-size: 1.25rem;
+          }
+        }
+
+        .free {
+          color: $success;
+          font-weight: 600;
+        }
+      }
+
+      .free-delivery-note {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background: rgba($success, 0.1);
+        color: $success;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: center;
+      }
+    }
+
+    .cart-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .whatsapp-order-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, $whatsapp 0%, darken($whatsapp, 10%) 100%);
+        color: $light;
+        border: none;
+        padding: 1rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba($whatsapp, 0.3);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      .clear-cart-btn {
+        background: rgba($error, 0.1);
+        color: $error;
+        border: 1px solid $error;
+        padding: 0.875rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: $error;
+          color: $light;
+        }
+      }
+    }
+  }
+}
+
+// WhatsApp Modal
+.whatsapp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  padding: 1rem;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease;
+}
+
+.whatsapp-modal {
+  background: $light;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid $gray-light;
+    background: linear-gradient(135deg, $whatsapp 0%, darken($whatsapp, 10%) 100%);
+    color: $light;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .close-modal {
+      background: rgba($light, 0.1);
+      border: none;
+      color: $light;
+      font-size: 1.25rem;
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba($light, 0.2);
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        font-weight: 600;
+        color: $dark;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        border: 2px solid $gray;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: $dark;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: $whatsapp;
+          box-shadow: 0 0 0 3px rgba($whatsapp, 0.1);
+        }
+
+        &::placeholder {
+          color: $gray-dark;
+        }
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+    }
+
+    .order-preview {
+      background: $gray-light;
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+
+      h4 {
+        font-size: 1.1rem;
+        color: $dark;
+        margin-bottom: 1rem;
+        font-weight: 700;
+      }
+
+      .preview-items {
+        max-height: 200px;
+        overflow-y: auto;
+        margin-bottom: 1rem;
+
+        .preview-item {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid rgba($gray, 0.5);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          span:first-child {
+            color: $dark;
+          }
+
+          span:last-child {
+            color: $primary;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .preview-total {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 1rem;
+        border-top: 2px solid $gray;
+        font-weight: 700;
+        font-size: 1.1rem;
+
+        span:last-child {
+          color: $primary;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-top: 1px solid $gray-light;
+
+    button {
+      flex: 1;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cancel-btn {
+      background: $gray-light;
+      color: $dark;
+      border: none;
+
+      &:hover {
+        background: darken($gray-light, 10%);
+      }
+    }
+
+    .send-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, $whatsapp 0%, darken($whatsapp, 10%) 100%);
+      color: $light;
+      border: none;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba($whatsapp, 0.3);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .cart-container {
+    max-width: 100%;
+  }
+
+  .whatsapp-modal {
+    max-height: 90vh;
+
+    .modal-header {
+      padding: 1.25rem;
+    }
+
+    .modal-body {
+      padding: 1.25rem;
+    }
+
+    .modal-footer {
+      padding: 1.25rem;
+      flex-direction: column;
+
+      button {
+        padding: 0.875rem;
+      }
+    }
+  }
+}

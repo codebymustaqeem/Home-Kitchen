@@ -1,0 +1,281 @@
+@import '../../styles/colors.scss';
+
+.location-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, $gray-light 0%, darken($gray-light, 5%) 100%);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 280px;
+  border: 2px solid transparent;
+
+  &:hover {
+    border-color: $primary;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba($primary, 0.15);
+  }
+
+  .location-icon {
+    font-size: 1.25rem;
+    color: $primary;
+    flex-shrink: 0;
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+
+    .label {
+      font-size: 0.75rem;
+      color: $gray-dark;
+      font-weight: 500;
+    }
+
+    .address {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $dark;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .chevron-icon {
+    color: $gray-dark;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+}
+
+.location-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.location-modal {
+  background: $light;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid $gray-light;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $dark;
+      margin: 0;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: $gray-dark;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: $gray-light;
+        color: $dark;
+      }
+    }
+  }
+
+  .modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+
+    .current-location,
+    .custom-location {
+      margin-bottom: 1.5rem;
+
+      h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: $dark;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .location-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+
+      .location-option {
+        padding: 1rem;
+        background: $gray-light;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        text-align: left;
+        font-size: 0.95rem;
+        color: $dark;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          border-color: $primary;
+          background: rgba($primary, 0.05);
+        }
+
+        &.selected {
+          border-color: $primary;
+          background: rgba($primary, 0.1);
+          color: $primary;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .address-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid $gray;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: $dark;
+      resize: vertical;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+        box-shadow: 0 0 0 3px rgba($primary, 0.1);
+      }
+
+      &::placeholder {
+        color: $gray-dark;
+      }
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-top: 1px solid $gray-light;
+
+    button {
+      flex: 1;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cancel-btn {
+      background: $gray-light;
+      color: $dark;
+      border: none;
+
+      &:hover {
+        background: darken($gray-light, 10%);
+      }
+    }
+
+    .save-btn {
+      background: linear-gradient(135deg, $primary 0%, darken($primary, 10%) 100%);
+      color: $light;
+      border: none;
+
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba($primary, 0.3);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .location-selector {
+    min-width: auto;
+    padding: 0.625rem 1rem;
+
+    .location-info {
+      .address {
+        font-size: 0.875rem;
+        max-width: 150px;
+      }
+    }
+  }
+
+  .location-modal {
+    max-height: 90vh;
+
+    .modal-header {
+      padding: 1.25rem;
+
+      h3 {
+        font-size: 1.1rem;
+      }
+    }
+
+    .modal-body {
+      padding: 1.25rem;
+    }
+
+    .modal-footer {
+      padding: 1.25rem;
+      flex-direction: column;
+
+      button {
+        padding: 0.875rem;
+      }
+    }
+  }
+}

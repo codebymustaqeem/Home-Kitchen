@@ -1,0 +1,60 @@
+@import './styles/colors.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: #fafafa;
+  color: $dark;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+// Scrollbar Styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $gray-light;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $gray-dark;
+  border-radius: 4px;
+
+  &:hover {
+    background: darken($gray-dark, 10%);
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+}
